@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
 import jwt, { SignOptions } from 'jsonwebtoken';
 import crypto from 'crypto';
-import { AuthRequest } from '../types';
-import User from '../models/User';
-import OTPAttempt from '../models/OTPAttempt';
-import { sendEmail } from '../utils/email';
-import { generateOTP } from '../utils/otp';
-import logger from '../config/logger';
+import { AuthRequest } from '../types/index.js';
+import User from '../models/User.js';
+import OTPAttempt from '../models/OTPAttempt.js';
+import { sendEmail } from '../utils/email.js';
+import { generateOTP } from '../utils/otp.js';
+import logger from '../config/logger.js';
 
 const signToken = (id: string): string => {
     if (!process.env.JWT_SECRET) {
@@ -46,7 +46,7 @@ const createSendToken = (user: any, statusCode: number, res: Response) => {
 
 export const register = async (req: Request, res: Response) => {
     try {
-        const { email, password, fullName } = req.body;
+        const { email, password, fullName, role } = req.body;
 
         // Check if user already exists
         const existingUser = await User.findOne({ email });
@@ -61,7 +61,7 @@ export const register = async (req: Request, res: Response) => {
             email,
             password,
             fullName,
-            role: 'student' // Default role
+            role: role || 'student' // Allow role to be set during registration
         });
 
         // Generate and send OTP

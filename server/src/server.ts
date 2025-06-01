@@ -1,77 +1,53 @@
-import express, { Express, Request, Response, NextFunction } from 'express';
+import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import helmet from 'helmet';
-import compression from 'compression';
-import hpp from 'hpp';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import connectDB from './config/database.js';
 import logger from './config/logger.js';
+import routes from './routes/index.js';
 
-// Load environment variables
-dotenv.config();
+const app = express();
 
-// Create Express app
-const app: Express = express();
-
-// Security Middleware
-app.use(helmet()); // Set security HTTP headers
-app.use(hpp()); // Prevent HTTP Parameter Pollution
+// Connect to MongoDB
+connectDB();
 
 // Middleware
-app.use(cors());
-app.use(cookieParser());
-app.use(compression()); // Compress all responses
-app.use(morgan('dev')); // HTTP request logger
+app.use(helmet()); // Security headers
+app.use(cors()); // Enable CORS
+app.use(express.json()); // Parse JSON bodies
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
+app.use(cookieParser()); // Parse cookies
+app.use(morgan('dev')); // HTTP request logging
 
-// Basic route
-app.get('/', (req: Request, res: Response) => {
-    res.json({ message: 'Classroom API' });
-});
+// Mount routes
+app.use('/api/v1', routes);
 
 // Error handling middleware
-interface ErrorResponse extends Error {
-    status?: number;
-}
-
-app.use((err: ErrorResponse, req: Request, res: Response, next: NextFunction) => {
-    console.error(err.stack);
+app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
     logger.error(err.stack);
     res.status(err.status || 500).json({
-        message: err.message || 'Something went wrong!'
+        status: 'error',
+        message: err.message || 'Internal server error'
     });
 });
 
 // Start server
-const PORT: number = parseInt(process.env.PORT || '5000', 10);
-
-const startServer = async (): Promise<void> => {
-    try {
-        await connectDB();
-        app.listen(PORT, () => {
-            console.log(`Server is running on port ${PORT}`);
-            logger.info(`Server started on port ${PORT}`);
-        });
-    } catch (err) {
-        console.error('Failed to start server:', err);
-        logger.error('Failed to start server:', err);
-        process.exit(1);
-    }
-};
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    logger.info(`Server is running on port ${PORT}`);
+});
 
 // Handle uncaught exceptions
 process.on('uncaughtException', (err) => {
-    console.error('Uncaught Exception:', err);
-    logger.error('Uncaught Exception:', err);
+    logger.error('UNCAUGHT EXCEPTION! Shutting down...');
+    logger.error(err.name, err.message);
     process.exit(1);
 });
 
 // Handle unhandled promise rejections
-process.on('unhandledRejection', (err) => {
-    console.error('Unhandled Rejection:', err);
-    logger.error('Unhandled Rejection:', err);
+process.on('unhandledRejection', (err: any) => {
+    logger.error('UNHANDLED REJECTION! Shutting down...');
+    logger.error(err.name, err.message);
     process.exit(1);
-});
-
-startServer(); 
+}); 

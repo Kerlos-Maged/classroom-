@@ -1,6 +1,6 @@
 import mongoose, { Document, Schema } from 'mongoose';
 import bcrypt from 'bcryptjs';
-import { User, OTPAttempt } from '../types';
+import { User, OTPAttempt } from '../types/index.js';
 
 export interface IUser extends Document {
     email: string;

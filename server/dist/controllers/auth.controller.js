@@ -1,10 +1,10 @@
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
-import User from '../models/User';
-import OTPAttempt from '../models/OTPAttempt';
-import { sendEmail } from '../utils/email';
-import { generateOTP } from '../utils/otp';
-import logger from '../config/logger';
+import User from '../models/User.js';
+import OTPAttempt from '../models/OTPAttempt.js';
+import { sendEmail } from '../utils/email.js';
+import { generateOTP } from '../utils/otp.js';
+import logger from '../config/logger.js';
 const signToken = (id) => {
     if (!process.env.JWT_SECRET) {
         throw new Error('JWT_SECRET is not defined');
@@ -32,7 +32,7 @@ const createSendToken = (user, statusCode, res) => {
 };
 export const register = async (req, res) => {
     try {
-        const { email, password, fullName } = req.body;
+        const { email, password, fullName, role } = req.body;
         // Check if user already exists
         const existingUser = await User.findOne({ email });
         if (existingUser) {
@@ -45,7 +45,7 @@ export const register = async (req, res) => {
             email,
             password,
             fullName,
-            role: 'student' // Default role
+            role: role || 'student' // Allow role to be set during registration
         });
         // Generate and send OTP
         const otp = generateOTP();

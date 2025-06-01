@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import User from '../models/User';
+import User from '../models/User.js';
 export const protect = async (req, res, next) => {
     try {
         // 1) Get token from header

@@ -1,7 +1,7 @@
 import express from 'express';
 import { body } from 'express-validator';
-import { validateRequest } from '../middleware/validateRequest';
-import { protect, restrictTo } from '../middleware/auth';
+import { validateRequest } from '../middleware/validateRequest.js';
+import { protect, restrictTo } from '../middleware/auth.js';
 import {
     register,
     login,
@@ -10,7 +10,8 @@ import {
     resetPassword,
     verifyOTP,
     resendOTP,
-} from '../controllers/auth.controller';
+} from '../controllers/auth.controller.js';
+import { generateUserExcelFile } from '../controllers/user.controller.js';
 
 const router = express.Router();
 
@@ -81,3 +82,12 @@ router.post(
 
 // Protected routes
 router.use(protect);
+
+// Generate Excel file with user data and QR codes (admin only)
+router.get(
+    '/excel',
+    restrictTo('admin'),
+    generateUserExcelFile
+);
+
+export default router; 
