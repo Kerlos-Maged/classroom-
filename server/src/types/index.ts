@@ -1,4 +1,5 @@
 import { Document } from 'mongoose';
+import { Request } from 'express';
 
 export interface OTPAttempt extends Document {
     user: Document['_id'];
@@ -34,6 +35,10 @@ export interface ErrorResponse extends Error {
 
 export interface AuthRequest extends Request {
     user?: User;
+    headers: {
+        authorization?: string;
+        [key: string]: string | string[] | undefined;
+    };
 }
 
 export interface TokenPayload {

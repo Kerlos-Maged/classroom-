@@ -1,8 +1,12 @@
-import mongoose, { Schema } from 'mongoose';
-const otpAttemptSchema = new Schema({
+import mongoose from 'mongoose';
+const otpAttemptSchema = new mongoose.Schema({
     user: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
+        required: true
+    },
+    otp: {
+        type: String,
         required: true
     },
     attempts: {
@@ -25,6 +29,6 @@ const otpAttemptSchema = new Schema({
 });
 // Index for faster queries
 otpAttemptSchema.index({ user: 1 });
-otpAttemptSchema.index({ blockExpires: 1 }, { expireAfterSeconds: 0 });
+otpAttemptSchema.index({ lastAttempt: 1 });
 const OTPAttempt = mongoose.model('OTPAttempt', otpAttemptSchema);
 export default OTPAttempt;

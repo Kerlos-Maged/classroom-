@@ -1,35 +1,50 @@
-import mongoose, { Document, Schema } from 'mongoose';
-import { OTPAttempt } from '../types';
+import mongoose, { Document } from 'mongoose';
 
-const otpAttemptSchema = new Schema<OTPAttempt>({
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
+export interface IOTPAttempt extends Document {
+    user: mongoose.Types.ObjectId;
+    otp: string;
+    attempts: number;
+    lastAttempt: Date;
+    isBlocked: boolean;
+    blockExpires?: Date;
+}
+
+const otpAttemptSchema = new mongoose.Schema<IOTPAttempt>(
+    {
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            required: true
+        },
+        otp: {
+            type: String,
+            required: true
+        },
+        attempts: {
+            type: Number,
+            default: 0
+        },
+        lastAttempt: {
+            type: Date,
+            default: Date.now
+        },
+        isBlocked: {
+            type: Boolean,
+            default: false
+        },
+        blockExpires: {
+            type: Date
+        }
     },
-    attempts: {
-        type: Number,
-        default: 0
-    },
-    lastAttempt: {
-        type: Date,
-        default: Date.now
-    },
-    isBlocked: {
-        type: Boolean,
-        default: false
-    },
-    blockExpires: {
-        type: Date
+    {
+        timestamps: true
     }
-}, {
-    timestamps: true
-});
+);
 
 // Index for faster queries
 otpAttemptSchema.index({ user: 1 });
-otpAttemptSchema.index({ blockExpires: 1 }, { expireAfterSeconds: 0 });
+otpAttemptSchema.index({ lastAttempt: 1 });
 
-const OTPAttempt = mongoose.model<OTPAttempt>('OTPAttempt', otpAttemptSchema);
+const OTPAttempt = mongoose.model<IOTPAttempt>('OTPAttempt', otpAttemptSchema);
 
 export default OTPAttempt; 
