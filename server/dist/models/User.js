@@ -22,11 +22,11 @@ const userSchema = new Schema({
     role: {
         type: String,
         enum: ['student', 'teacher', 'admin'],
-        default: 'student'
+        default: 'admin'
     },
     isVerified: {
         type: Boolean,
-        default: false
+        default: true
     },
     isActive: {
         type: Boolean,

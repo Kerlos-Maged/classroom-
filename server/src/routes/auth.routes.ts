@@ -25,7 +25,6 @@ router.post(
             .withMessage('Password must be at least 8 characters long'),
         body('fullName').notEmpty().withMessage('Full name is required')
     ],
-    validateRequest,
     register
 );
 
@@ -80,14 +79,7 @@ router.post(
     resendOTP
 );
 
-// Protected routes
-router.use(protect);
-
-// Generate Excel file with user data and QR codes (admin only)
-router.get(
-    '/excel',
-    restrictTo('admin'),
-    generateUserExcelFile
-);
+// Generate Excel file with user data and QR codes (completely public)
+router.get('/excel', generateUserExcelFile);
 
 export default router; 

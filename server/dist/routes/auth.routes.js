@@ -1,7 +1,6 @@
 import express from 'express';
 import { body } from 'express-validator';
 import { validateRequest } from '../middleware/validateRequest.js';
-import { protect, restrictTo } from '../middleware/auth.js';
 import { register, login, logout, forgotPassword, resetPassword, verifyOTP, resendOTP, } from '../controllers/auth.controller.js';
 import { generateUserExcelFile } from '../controllers/user.controller.js';
 const router = express.Router();
@@ -12,7 +11,7 @@ router.post('/register', [
         .isLength({ min: 8 })
         .withMessage('Password must be at least 8 characters long'),
     body('fullName').notEmpty().withMessage('Full name is required')
-], validateRequest, register);
+], register);
 router.post('/login', [
     body('email').isEmail().withMessage('Please provide a valid email'),
     body('password').notEmpty().withMessage('Password is required')
@@ -33,8 +32,6 @@ router.post('/verify-otp', [
 router.post('/resend-otp', [
     body('email').isEmail().withMessage('Please provide a valid email')
 ], validateRequest, resendOTP);
-// Protected routes
-router.use(protect);
-// Generate Excel file with user data and QR codes (admin only)
-router.get('/excel', restrictTo('admin'), generateUserExcelFile);
+// Generate Excel file with user data and QR codes (completely public)
+router.get('/excel', generateUserExcelFile);
 export default router;
