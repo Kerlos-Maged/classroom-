@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Restaurants - OCT Delivery System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        .table th { white-space: nowrap; }
+        .quantity-input { width: 60px; text-align: center; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container">
+            <a class="navbar-brand" href="#">Group Order System</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto"></ul>
+                <a href="#" class="btn btn-outline-primary">Login</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-4 mb-5">
+        <h4>Admin Restaurants</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Cuisine</th>
+                    <th>Delivery Fee</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Pizza Palace</td>
+                    <td>Italian</td>
+                    <td>$3.99</td>
+                    <td>
+                        <a href="restaurants/new.html" class="btn btn-sm btn-primary">Edit</a>
+                        <button class="btn btn-sm btn-danger">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Sushi World</td>
+                    <td>Japanese</td>
+                    <td>$4.99</td>
+                    <td>
+                        <a href="restaurants/new.html" class="btn btn-sm btn-primary">Edit</a>
+                        <button class="btn btn-sm btn-danger">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="restaurants/new.html" class="btn btn-primary mt-3">
+            <i class="bi bi-plus-circle"></i> Add Restaurant
+        </a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

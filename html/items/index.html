@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Orders - OCT Delivery System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        .table th { white-space: nowrap; }
+        .quantity-input { width: 60px; text-align: center; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container">
+            <a class="navbar-brand" href="#">Group Order System</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto"></ul>
+                <a href="#" class="btn btn-outline-primary">Login</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-4 mb-5">
+        <div class="d-flex justify-content-between align-items-start mb-4">
+            <h4>Group Orders</h4>
+            <a href="#" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Create Group Order
+            </a>
+        </div>
+        <div class="row g-4 mb-4">
+            <div class="col-md-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Total Orders</h6>
+                        <h2 class="card-title mb-0">12</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Total Spent</h6>
+                        <h2 class="card-title mb-0">$245.50</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Pending Payments</h6>
+                        <h2 class="card-title mb-0">2</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row g-4 mb-4">
+            <div class="col-md-6">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header">
+                        <h6 class="mb-0">Favorite Restaurants</h6>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="list-group list-group-flush">
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h6 class="mb-1">Pizza Palace</h6>
+                                        <small class="text-body-secondary">5 orders</small>
+                                    </div>
+                                    <span class="text-body-secondary">$120.00</span>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h6 class="mb-1">Sushi World</h6>
+                                        <small class="text-body-secondary">3 orders</small>
+                                    </div>
+                                    <span class="text-body-secondary">$60.00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header">
+                        <h6 class="mb-0">Most Ordered Items</h6>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="list-group list-group-flush">
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h6 class="mb-1">Margherita Pizza</h6>
+                                        <small class="text-body-secondary">Ordered 8 times</small>
+                                    </div>
+                                    <span class="text-body-secondary">$80.00</span>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h6 class="mb-1">California Roll</h6>
+                                        <small class="text-body-secondary">Ordered 5 times</small>
+                                    </div>
+                                    <span class="text-body-secondary">$25.00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card shadow-sm mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Active Orders</h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="list-group list-group-flush">
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <h6 class="mb-1">Pizza Palace</h6>
+                                <div class="text-body-secondary small">Created by Alice • Room 101</div>
+                                <div class="text-body-secondary small">Delivery at 2025-06-30 18:00</div>
+                                <div class="text-body-secondary small"><i class="bi bi-chat-text"></i> Please be on time!</div>
+                            </div>
+                            <div class="text-end">
+                                <div class="badge bg-success mb-1">Open</div>
+                                <div class="text-body-secondary small">4 orders</div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <h6 class="mb-1">Sushi World</h6>
+                                <div class="text-body-secondary small">Created by Bob • Room 102</div>
+                                <div class="text-body-secondary small">Delivery at 2025-06-30 19:00</div>
+                            </div>
+                            <div class="text-end">
+                                <div class="badge bg-success mb-1">Open</div>
+                                <div class="text-body-secondary small">2 orders</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card shadow-sm">
+            <div class="card-header">
+                <h5 class="mb-0">Past Orders</h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="list-group list-group-flush">
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <h6 class="mb-1">Pizza Palace</h6>
+                                <div class="text-body-secondary small">Created by Alice • Room 101</div>
+                                <div class="text-body-secondary small">Delivered 2025-06-29 18:00</div>
+                            </div>
+                            <div class="text-end">
+                                <div class="badge bg-info mb-1">Delivered</div>
+                                <div class="text-body-secondary small">4 orders</div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <h6 class="mb-1">Sushi World</h6>
+                                <div class="text-body-secondary small">Created by Bob • Room 102</div>
+                                <div class="text-body-secondary small">Closed 2025-06-29 19:00</div>
+                            </div>
+                            <div class="text-end">
+                                <div class="badge bg-secondary mb-1">Closed</div>
+                                <div class="text-body-secondary small">2 orders</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 
